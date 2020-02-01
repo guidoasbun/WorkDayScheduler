@@ -1,6 +1,6 @@
 let currentDay = moment().format("dddd, MMMM Do YYYY")
-let currentHour = '10 AM' //moment().format("h A")
-console.log(typeof(currentHour))
+let currentHour = parseInt(moment().format("H"))-9
+
 let hours = [
   {
     time:'9 AM',
@@ -39,12 +39,21 @@ let hours = [
     data: ''
   }
 ]
-console.log(typeof(hours[1]))
+let hours_serialized = JSON.stringify(hours)
+localStorage.setItem("hours", hours_serialized)
 
 $('#currentDay').html(currentDay)
 
 
 const scheduleTable = $('#scheduleTable')
+const rowColor = function(hour) {
+  if( hour <  currentHour){
+    return 'past'
+  } else if (hour > currentHour) {
+    return 'future'
+  }
+  return 'present'
+}
 
 function createSchedule() {
   for (let i = 0; i < hours.length; i++) {
@@ -56,7 +65,7 @@ function createSchedule() {
         <div class="col-2 bg-light hour">
           <p>${hours[i].time}</p>
         </div>
-        <div id="text-input"class="col past">
+        <div id="text-input"class="col ${rowColor(i)}">
           <input type="text" name="text${i}" id="text${i}" class="form-control-plaintext" placeholder="${hours[i].data}">
         </div>
         <div class="col-1 saveBtn ">
