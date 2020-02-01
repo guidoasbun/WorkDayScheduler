@@ -9,7 +9,7 @@ const scheduleTable = $('#scheduleTable')
 
 function createSchedule() {
   for (let i = 0; i < hours.length; i++) {
-  scheduleTable.html(`
+  let timeElem = $(`
   <div class="container">
   <div>
     <form>
@@ -28,6 +28,7 @@ function createSchedule() {
   </div>
   </div>
 `)
+$('#scheduleTable').append(timeElem)
 }
 }
 createSchedule()
