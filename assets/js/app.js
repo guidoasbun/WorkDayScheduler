@@ -39,7 +39,8 @@ let hours = [
     data: ''
   }
 ]
-
+let hours_serialized = JSON.stringify(hours)
+localStorage.setItem("hours", hours_serialized)
 
 $('#currentDay').html(currentDay)
 
