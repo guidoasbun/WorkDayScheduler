@@ -1,5 +1,6 @@
 let currentDay = moment().format("dddd, MMMM Do YYYY")
-let currentHour = parseInt(moment().format("H"))-9
+//subtract 9 because the day starts at 9 AM, 
+let currentHour = 5 //parseInt(moment().format("H"))-9
 
 let hours = [
   {
@@ -39,8 +40,14 @@ let hours = [
     data: ''
   }
 ]
-let hours_serialized = JSON.stringify(hours)
-localStorage.setItem("hours", hours_serialized)
+
+localStorage.setItem('arr', JSON.stringify(hours))
+
+// let hours_serialized = JSON.stringify(hours)
+// localStorage.setItem("hours", hours_serialized)
+
+
+
 
 $('#currentDay').html(currentDay)
 
@@ -83,11 +90,15 @@ function createSchedule() {
   document.getElementById(`submit${i}`).addEventListener('click', function (event) {
     event.preventDefault()
     hours[i].data = document.getElementById(`text${i}`).value
+    localStorage.setItem('arr', JSON.stringify(hours))
+    hours = JSON.parse(localStorage.getItem('hours')) || []
     console.log(hours)
     // console.log(document.getElementById(`text${i}`).value)
     // console.log(event.target.id)
   })
+  
   }
+
 }
 
 createSchedule()
