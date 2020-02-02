@@ -1,6 +1,8 @@
 let currentDay = moment().format("dddd, MMMM Do YYYY")
 //subtract 9 because the day starts at 9 AM, 
-let currentHour = 5 //parseInt(moment().format("H"))-9
+let currentHour = parseInt(moment().format("H"))-9
+
+// hours = JSON.parse(localStorage.getItem('hours')) || []
 
 let hours = [
   {
@@ -43,14 +45,7 @@ let hours = [
 
 localStorage.setItem('arr', JSON.stringify(hours))
 
-// let hours_serialized = JSON.stringify(hours)
-// localStorage.setItem("hours", hours_serialized)
-
-
-
-
 $('#currentDay').html(currentDay)
-
 
 const scheduleTable = $('#scheduleTable')
 const rowColor = function(hour) {
@@ -87,18 +82,15 @@ function createSchedule() {
 
   $('#scheduleTable').append(timeElem)  
 
-  document.getElementById(`submit${i}`).addEventListener('click', function (event) {
+  $(`#submit${i}`).click(function (event) {
     event.preventDefault()
-    hours[i].data = document.getElementById(`text${i}`).value
+    hours[i].data = $(`#text${i}`).value
     localStorage.setItem('arr', JSON.stringify(hours))
     // hours = JSON.parse(localStorage.getItem('hours')) || []
     console.log(hours)
-    // console.log(document.getElementById(`text${i}`).value)
-    // console.log(event.target.id)
+    
   })
-  
   }
-
 }
 
 createSchedule()
