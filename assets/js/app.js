@@ -91,7 +91,7 @@ function createSchedule() {
     event.preventDefault()
     hours[i].data = document.getElementById(`text${i}`).value
     localStorage.setItem('arr', JSON.stringify(hours))
-    hours = JSON.parse(localStorage.getItem('hours')) || []
+    // hours = JSON.parse(localStorage.getItem('hours')) || []
     console.log(hours)
     // console.log(document.getElementById(`text${i}`).value)
     // console.log(event.target.id)
